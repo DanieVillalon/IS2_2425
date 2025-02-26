@@ -1,6 +1,13 @@
+package es.unican.is2.impuestoCirculacionDAOH2;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+
+import es.unican.is2.impuestoCirculacionCommon.DataAccessException;
+import es.unican.is2.impuestoCirculacionCommon.Motocicleta;
+import es.unican.is2.impuestoCirculacionCommon.TipoMotor;
+import es.unican.is2.impuestoCirculacionCommon.Turismo;
+import es.unican.is2.impuestoCirculacionCommon.Vehiculo;
 
 /**
  * Clase de utilidad que mapea filas de la base de datos a 

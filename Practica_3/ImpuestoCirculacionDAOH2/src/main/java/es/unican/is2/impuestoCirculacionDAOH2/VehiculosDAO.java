@@ -1,9 +1,16 @@
+package es.unican.is2.impuestoCirculacionDAOH2;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+
+import es.unican.is2.impuestoCirculacionCommon.DataAccessException;
+import es.unican.is2.impuestoCirculacionCommon.IVehiculosDAO;
+import es.unican.is2.impuestoCirculacionCommon.Motocicleta;
+import es.unican.is2.impuestoCirculacionCommon.Turismo;
+import es.unican.is2.impuestoCirculacionCommon.Vehiculo;
 
 /**
  * Clase que implementa la capa DAO de acceso a vehiculos.

@@ -1,3 +1,4 @@
+package es.unican.is2.impuestoCirculacionCommon;
 /**
  * Interfaz de negocio para gestionar vehiculos
  */
