@@ -34,7 +34,7 @@
 				</descriptorRefs>
 				<archive>
 					<manifest>
-						<mainClass>es.unican.impuestoCirculacionMain.Runner</mainClass>
+						<mainClass>es.unican.is2.impuestoCirculacionMain.Runner</mainClass>
 					</manifest>
 				</archive>
 			</configuration>
