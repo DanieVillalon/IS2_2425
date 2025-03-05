@@ -35,7 +35,7 @@ public class Turismo extends Vehiculo {
 
 	@Override
 	public double precioImpuesto() {
-		double precio = 0;
+		double precio = -1;
 		
 		if(this.potencia < 8) {
 			precio = 25;			
@@ -45,7 +45,7 @@ public class Turismo extends Vehiculo {
 			precio = 143;
 		} else if (16 <= this.potencia && this.potencia < 20) {
 			precio = 178;
-		} else if (this.potencia >= 20) {
+		} else {
 			precio = 223;
 		}
 		
