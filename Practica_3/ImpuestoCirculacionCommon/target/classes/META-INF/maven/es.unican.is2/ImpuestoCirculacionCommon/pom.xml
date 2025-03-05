@@ -4,21 +4,4 @@
   <artifactId>ImpuestoCirculacionCommon</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
-  <build>
-	  <plugins>
-		  <plugin>
-			<groupId>es.unican.is2</groupId>
-			<artifactId>maven-jar-plugin</artifactId>
-			<version>3.4.2</version>
-		  </plugin>
-	  </plugins>
-  </build>
-  
-  <dependencies>
-  	<dependency>
-  		<groupId>es.unican.is2</groupId>
-  		<artifactId>ImpuestoCirculacionBusiness</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  </dependencies>
 </project>

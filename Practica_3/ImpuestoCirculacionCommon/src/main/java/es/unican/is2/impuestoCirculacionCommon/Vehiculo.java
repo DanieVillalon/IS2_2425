@@ -15,9 +15,18 @@ public abstract class Vehiculo {
 	private LocalDate fechaMatriculacion;
 	private TipoMotor motor;
 
-	// TODO
+	/**
+	 * Metodo constructor de la clase Vehiculo
+	 * @param id, identificador del vehiculo
+	 * @param matricula, matricula del vehiculo
+	 * @param fechaMatriculacion, fecha de su primera matriculacion
+	 * @param motor, tipo motor
+	 */
 	public Vehiculo(long id, String matricula, LocalDate fechaMatriculacion, TipoMotor motor) {
-		// TODO
+		this.id = id;
+		this.matricula = matricula;
+		this.fechaMatriculacion = fechaMatriculacion;
+		this.motor = motor;
 	}
 
 	/**
@@ -48,7 +57,10 @@ public abstract class Vehiculo {
 		return id;
 	}
 
-	// TODO
+	/**
+	 * Calcula el impuesto de circulacion del vehiculo, segun caracteristicas y con bonificaciones aplicacadas
+	 * @return el precio final del impuesto asignado al tipo de vehiculo
+	 */
 	public abstract double precioImpuesto();
 
 }
