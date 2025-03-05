@@ -14,4 +14,11 @@
 	  </plugins>
   </build>
   
-  </project>
+  <dependencies>
+  	<dependency>
+  		<groupId>es.unican.is2</groupId>
+  		<artifactId>ImpuestoCirculacionBusiness</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+</project>

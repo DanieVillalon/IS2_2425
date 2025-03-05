@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Clase que representa un contribuyente del ayuntamiento.
  * Cada contribuyente debe tener un dni que lo identifica y 
- * puede tener vehiculos a su nombre
+ * puede tener vehiculos a su nombre.
  */
 public class Contribuyente {
 
@@ -16,9 +16,18 @@ public class Contribuyente {
     
     private List<Vehiculo> vehiculos = new LinkedList<Vehiculo>();
 
-    //TODO
+    /**
+     * Constructor de la clase Contribuyente.
+     * @param nombre, nombre del contribuyente.
+     * @param apellido1, primer apellido del contribuyente.
+     * @param apellido2, segundo apellido del contribuyente.
+     * @param dni, identificador del contribyuente.
+     */
     public Contribuyente(String nombre, String apellido1, String apellido2, String dni) {
-		//TODO
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.dni = dni;
 	}
     
     /**
