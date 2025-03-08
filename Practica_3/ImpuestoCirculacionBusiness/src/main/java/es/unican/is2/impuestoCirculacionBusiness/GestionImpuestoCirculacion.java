@@ -1,5 +1,7 @@
 package es.unican.is2.impuestoCirculacionBusiness;
 
+import java.util.List;
+
 import es.unican.is2.impuestoCirculacionCommon.Contribuyente;
 import es.unican.is2.impuestoCirculacionCommon.DataAccessException;
 import es.unican.is2.impuestoCirculacionCommon.IContribuyentesDAO;
@@ -35,22 +37,43 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 		return null;
 	} 
 	
-	public boolean cambiarTitularVehiculo(String matricula, String dniActual, String dniNuevo) {
+	@Override
+	public boolean cambiaTitularVehiculo(String matricula, String dniActual, String dniNuevo) 
+			throws OperacionNoValidaException, DataAccessException {
+		Vehiculo v = daoDeVehiculos.vehiculoPorMatricula(matricula);
+		if (v == null) {
+			System.out.println("ERROR: El vehículo no se encuentra registrado");
+			return false;
+		}
+		
+		Contribuyente cA = daoDeContribuyentes.contribuyente(dniActual);
+		if (cA == null) {
+			System.out.println("ERROR: El contribuyente titular no se encuentra registrado");
+			return false;
+		}
+		
+		Contribuyente cN = daoDeContribuyentes.contribuyente(dniNuevo);
+		if (cN == null) {
+			System.out.println("ERROR: El contribuyente no titular no se encuentra registrado");
+			return false;
+		}
+		
+		if (cA.buscaVehiculo(matricula) == null) {
+			throw new OperacionNoValidaException("ERROR: El dni indicado no pertenece al titular del vehículo");
+		}
+		
+		cA.getVehiculos().remove(v);
+		cN.getVehiculos().add(v);	//TODO:(ELIMINAR ANTES DE ENTREGAR) puede no funcionar con contribuyentes sin vehículos
+		
 		return true;
 	} 
 	
-	public Contribuyente contribuyente(String dni) {
-		return null;
+	public Contribuyente contribuyente(String dni) throws DataAccessException {
+		
+		return daoDeContribuyentes.contribuyente(dni);
 	}
 	
-	public Vehiculo vehiculo(String matricula) {
-		return null;
-	}
-
-	@Override
-	public boolean cambiaTitularVehiculo(String matricula, String dniActual, String dniNuevo)
-			throws OperacionNoValidaException, DataAccessException {
-		// TODO Auto-generated method stub
-		return false;
+	public Vehiculo vehiculo(String matricula) throws DataAccessException {
+		return daoDeVehiculos.vehiculoPorMatricula(matricula);
 	}
 }
