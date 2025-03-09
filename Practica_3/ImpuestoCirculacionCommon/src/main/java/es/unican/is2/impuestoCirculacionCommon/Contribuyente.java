@@ -14,7 +14,7 @@ public class Contribuyente {
     private String apellido1;
     private String apellido2;
     
-    private List<Vehiculo> vehiculos = new LinkedList<Vehiculo>();
+    public List<Vehiculo> vehiculos = new LinkedList<Vehiculo>();
 
     /**
      * Constructor de la clase Contribuyente.
