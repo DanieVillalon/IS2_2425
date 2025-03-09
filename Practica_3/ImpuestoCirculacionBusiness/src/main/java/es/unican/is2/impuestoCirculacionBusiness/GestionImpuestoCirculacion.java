@@ -1,7 +1,5 @@
 package es.unican.is2.impuestoCirculacionBusiness;
 
-import java.util.List;
-
 import es.unican.is2.impuestoCirculacionCommon.Contribuyente;
 import es.unican.is2.impuestoCirculacionCommon.DataAccessException;
 import es.unican.is2.impuestoCirculacionCommon.IContribuyentesDAO;
@@ -21,20 +19,55 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 		this.daoDeVehiculos = vDAO;
 	}
 	
-	public Contribuyente altaContribuyente(Contribuyente c) {
-		return null;
+	
+	public Contribuyente altaContribuyente(Contribuyente c) throws DataAccessException {
+		if (daoDeContribuyentes.contribuyente(c.getDni()) != null) {
+			return null;
+		}
+		return daoDeContribuyentes.creaContribuyente(c);
 	}
 	
-	public Contribuyente bajaContribuyente(String dni) {
-		return null;
+	
+	public Contribuyente bajaContribuyente(String dni) throws DataAccessException, OperacionNoValidaException {
+		if (daoDeContribuyentes.contribuyente(dni) == null) {
+			return null;
+		}
+		Contribuyente c = daoDeContribuyentes.contribuyente(dni);
+		if (c.getVehiculos().isEmpty()) {
+			throw new OperacionNoValidaException("ERROR: El contribuyente con el DNI indicado, tiene vehiculos asociados a su nombre y no se puede dar de baja"); 
+		}
+		return daoDeContribuyentes.eliminaContribuyente(dni);
 	}
 	
-	public Vehiculo altaVehiculo(Vehiculo v, String dni) {
-		return null;
+	
+	public Vehiculo altaVehiculo(Vehiculo v, String dni) throws DataAccessException, OperacionNoValidaException {
+		if (daoDeContribuyentes.contribuyente(dni) == null) {
+			return null;
+		}
+		if (daoDeVehiculos.vehiculoPorMatricula(v.getMatricula()) != null) {
+			throw new OperacionNoValidaException("ERROR: Ya existe un vehiculo con esa matricula"); 
+		}
+		Contribuyente c = daoDeContribuyentes.contribuyente(dni);
+		daoDeVehiculos.creaVehiculo(v);
+		c.vehiculos.add(v);
+		return v;
 	}
 	
-	public Vehiculo bajaVehiculo(String dni, String matricula) {
-		return null;
+	public Vehiculo bajaVehiculo(String dni, String matricula) throws DataAccessException {
+		if (daoDeContribuyentes.contribuyente(dni) == null) {
+			return null;
+		}
+		if (daoDeVehiculos.vehiculoPorMatricula(matricula) == null){
+			return null;
+		}
+		Contribuyente c = daoDeContribuyentes.contribuyente(dni);
+		if (c.buscaVehiculo(matricula) == null) {
+			throw new OperacionNoValidaException("ERROR: El vehiculo no pertenece al contribuyente indicacdo");
+		}
+		Vehiculo v = daoDeVehiculos.vehiculoPorMatricula(matricula);
+		c.vehiculos.remove(v);
+		daoDeVehiculos.eliminaVehiculo(matricula);
+		return v;
 	} 
 	
 	@Override
