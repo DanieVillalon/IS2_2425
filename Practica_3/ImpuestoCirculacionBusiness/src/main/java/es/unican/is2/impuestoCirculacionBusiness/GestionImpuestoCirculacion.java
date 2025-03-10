@@ -49,7 +49,7 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 		}
 		Contribuyente c = daoDeContribuyentes.contribuyente(dni);
 		daoDeVehiculos.creaVehiculo(v);
-		c.vehiculos.add(v);
+		c.anhadeVehiculo(v);
 		return v;
 	}
 	
@@ -65,7 +65,7 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 			throw new OperacionNoValidaException("ERROR: El vehiculo no pertenece al contribuyente indicacdo");
 		}
 		Vehiculo v = daoDeVehiculos.vehiculoPorMatricula(matricula);
-		c.vehiculos.remove(v);
+		c.eliminaVehiculo(v);
 		daoDeVehiculos.eliminaVehiculo(matricula);
 		return v;
 	} 
@@ -95,9 +95,8 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 			throw new OperacionNoValidaException("ERROR: El dni indicado no pertenece al titular del vehículo");
 		}
 		
-		cA.getVehiculos().remove(v);
-		cN.getVehiculos().add(v);	//TODO:(ELIMINAR ANTES DE ENTREGAR) puede no funcionar con contribuyentes sin vehículos
-		
+		cA.eliminaVehiculo(v);
+		cN.anhadeVehiculo(v);	
 		return true;
 	} 
 	
