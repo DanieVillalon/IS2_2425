@@ -14,7 +14,7 @@ public class Contribuyente {
     private String apellido1;
     private String apellido2;
     
-    public List<Vehiculo> vehiculos = new LinkedList<Vehiculo>();
+    private List<Vehiculo> vehiculos = new LinkedList<Vehiculo>(); //TODO: revisar
 
     /**
      * Constructor de la clase Contribuyente.
@@ -66,6 +66,34 @@ public class Contribuyente {
         	vehiculos = new LinkedList<Vehiculo>();
         }
         return this.vehiculos;
+    }
+    
+    /**
+     * Añade un nuevo vehículo a nombre del contribuyente
+     * @param vNuevo, vehículo que se añade a nombre del contribuyente
+     * @return true si se añade el vehículo correctamente, false si el vehículo ya está a nombre del contribuyente
+     */
+    public boolean anhadeVehiculo(Vehiculo vNuevo) {
+    	if (this.vehiculos.contains(vNuevo)) {
+			return false;
+		} else {
+			this.vehiculos.add(vNuevo);
+			return true;
+		}
+    }
+ 
+    /**
+     * Elimina un vehículo de la lista de vehículos a nombre del contribuyente
+     * @param vEliminar, vehículo que se elimina
+     * @return true si se elimina el vehículo correctamente, false si el vehículo no está a nombre del contribuyente
+     */
+    public boolean eliminaVehiculo(Vehiculo vEliminar) {
+    	if (!this.vehiculos.contains(vEliminar)) {
+			return false;
+		} else {
+			this.vehiculos.remove(vEliminar);
+			return true;
+		}
     }
     
     /**
