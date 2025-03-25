@@ -48,11 +48,11 @@ public class Motocicleta extends Vehiculo {
 		case HIBRIDO:
 			
 			if (actual.isBefore(this.getFechaMatriculacion().plusYears(4))) {
-				return tarifa - (tarifa * 0.75);
+				return tarifa - (tarifa * this.getMotor().getDescuentoImpuesto());
 			}
 		case GAS:
 			if (actual.isBefore(this.getFechaMatriculacion().plusYears(1))) {
-				return tarifa - (tarifa * 0.5);
+				return tarifa - (tarifa * this.getMotor().getDescuentoImpuesto());
 			}
 		default:
 			return tarifa;

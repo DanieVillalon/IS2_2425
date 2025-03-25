@@ -51,22 +51,24 @@ public class Turismo extends Vehiculo {
 			precio = 223;
 		}
 		
+		
 		if(LocalDate.now().minusYears(25).isAfter(getFechaMatriculacion())) {
 			precio = 0;
 		} else {
 			TipoMotor motor = this.getMotor();
+			
 			switch (motor) {
 			case ELECTRICO:
-				precio = precio * motor.getDescuentoImpuesto();
+				precio -= precio * motor.getDescuentoImpuesto();
 				break;
 			case GAS:
 				if (LocalDate.now().minusYears(1).isBefore(getFechaMatriculacion())) {
-					precio = precio * motor.getDescuentoImpuesto();					
+					precio -= precio * motor.getDescuentoImpuesto();					
 				}
 				break;
 			case HIBRIDO:
 				if (LocalDate.now().minusYears(4).isBefore(getFechaMatriculacion())) {
-					precio = precio * motor.getDescuentoImpuesto();					
+					precio -= precio * motor.getDescuentoImpuesto();					
 				}
 				break;
 			default:

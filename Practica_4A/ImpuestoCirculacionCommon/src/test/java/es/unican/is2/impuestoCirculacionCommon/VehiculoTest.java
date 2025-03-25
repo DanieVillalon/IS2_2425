@@ -13,7 +13,6 @@ public class VehiculoTest {
 	private Turismo sut2;
 		
 	
-	
 	@Test
 	public void testConstructorMotocicleta() {
 		sut1 = new Motocicleta(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 125);
@@ -24,13 +23,13 @@ public class VehiculoTest {
 		assertEquals(TipoMotor.HIBRIDO, sut1.getMotor());
 		assertEquals(125, sut1.getCilindrada());
 		
-		assertThrows(OperacionNoValidaException.class, new Motocicleta(-3, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 125));
-		assertThrows(OperacionNoValidaException.class, new Motocicleta(1, null, LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 125));
-		assertThrows(OperacionNoValidaException.class, new Motocicleta(1, "ABC1234", LocalDate.now().plusDays(6), TipoMotor.HIBRIDO, 125));
-		assertThrows(OperacionNoValidaException.class, new Motocicleta(1, "ABC1234", null, TipoMotor.HIBRIDO, 125));
-		assertThrows(OperacionNoValidaException.class, new Motocicleta(1, "ABC1234", LocalDate.now().minusYears(3), null, 125));
-		assertThrows(OperacionNoValidaException.class, new Motocicleta(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, -1));
-		assertThrows(OperacionNoValidaException.class, new Motocicleta(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 0));
+		assertThrows(OperacionNoValidaException.class,  () -> new Motocicleta(-3, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 125));
+		assertThrows(NullPointerException.class, () -> new Motocicleta(1, null, LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 125));
+		assertThrows(OperacionNoValidaException.class, () -> new Motocicleta(1, "ABC1234", LocalDate.now().plusDays(6), TipoMotor.HIBRIDO, 125));
+		assertThrows(NullPointerException.class, () -> new Motocicleta(1, "ABC1234", null, TipoMotor.HIBRIDO, 125));
+		assertThrows(NullPointerException.class, () -> new Motocicleta(1, "ABC1234", LocalDate.now().minusYears(3), null, 125));
+		assertThrows(OperacionNoValidaException.class, () -> new Motocicleta(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, -1));
+		assertThrows(OperacionNoValidaException.class, () -> new Motocicleta(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 0));
 		
 	}
 	
@@ -40,8 +39,8 @@ public class VehiculoTest {
 		
 		assertEquals(20, sut2.getPotencia());
 
-		assertThrows(OperacionNoValidaException.class, new Turismo(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, -1));
-		assertThrows(OperacionNoValidaException.class, new Turismo(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 0));
+		assertThrows(OperacionNoValidaException.class, () -> new Turismo(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, -1));
+		assertThrows(OperacionNoValidaException.class, () -> new Turismo(1, "ABC1234", LocalDate.now().minusYears(3), TipoMotor.HIBRIDO, 0));
 		
 	}
 
@@ -83,6 +82,44 @@ public class VehiculoTest {
 		
 		sut1 = new Motocicleta(1, "ABC1234", LocalDate.now().minusYears(2), TipoMotor.ELECTRICO, 1200);
 		assertEquals(30, sut1.precioImpuesto());
+		
+	}
+	
+	@Test
+	public void testPrecioImpuestoTurismo() {
+		// Casos Válidos
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusMonths(3), TipoMotor.GAS, 5);
+		assertEquals(12.5, sut2.precioImpuesto());
+		
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(1), TipoMotor.GAS, 5);
+		assertEquals(25, sut2.precioImpuesto());
+		
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(2), TipoMotor.GAS, 8);
+		assertEquals(67, sut2.precioImpuesto());
+		
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(2), TipoMotor.HIBRIDO, 10);
+		assertEquals(16.75, sut2.precioImpuesto());
+		
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(4), TipoMotor.HIBRIDO, 10);
+		assertEquals(67, sut2.precioImpuesto());
+
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(5), TipoMotor.HIBRIDO, 16);
+		assertEquals(178, sut2.precioImpuesto());
+		
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(2), TipoMotor.DIESEL, 12);
+		assertEquals(143, sut2.precioImpuesto());
+
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(25), TipoMotor.DIESEL, 18);
+		assertEquals(178, sut2.precioImpuesto());
+
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(26), TipoMotor.GASOLINA, 18);
+		assertEquals(0, sut2.precioImpuesto());
+
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(2), TipoMotor.GASOLINA, 20);
+		assertEquals(223, sut2.precioImpuesto());
+
+		sut2 = new Turismo(1, "ABC1234", LocalDate.now().minusYears(2), TipoMotor.ELECTRICO, 20);
+		assertEquals(55.75, sut2.precioImpuesto());	
 		
 	}
 }
