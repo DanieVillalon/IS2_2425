@@ -1,6 +1,5 @@
 package es.unican.is2.impuestoCirculacionCommon;
 
-
 import java.time.LocalDate;
 
 /**
@@ -12,6 +11,9 @@ public class Motocicleta extends Vehiculo {
 
 	public Motocicleta(long id, String matricula, LocalDate fechaMatriculacion, TipoMotor motor, int cilindrada) {
 		super(id, matricula, fechaMatriculacion, motor);
+		if (cilindrada <= 0) {
+			throw new OperacionNoValidaException("ERROR: datos introducidos no válidos");
+		}
 		this.cilindrada = cilindrada;
 	}
 
@@ -42,7 +44,7 @@ public class Motocicleta extends Vehiculo {
 		}
 		switch (this.getMotor()) {
 		case ELECTRICO: 
-			return tarifa - (tarifa * 0.75);
+			return tarifa - (tarifa * TipoMotor.ELECTRICO.getDescuentoImpuesto());
 		case HIBRIDO:
 			
 			if (actual.isBefore(this.getFechaMatriculacion().plusYears(4))) {
@@ -52,9 +54,16 @@ public class Motocicleta extends Vehiculo {
 			if (actual.isBefore(this.getFechaMatriculacion().plusYears(1))) {
 				return tarifa - (tarifa * 0.5);
 			}
+		default:
+			return tarifa;
 		}
-		
-		return tarifa;
 	}
-
 }
+
+
+
+
+
+
+
+

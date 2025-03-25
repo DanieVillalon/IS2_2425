@@ -21,8 +21,13 @@ public abstract class Vehiculo {
 	 * @param matricula, matricula del vehiculo
 	 * @param fechaMatriculacion, fecha de su primera matriculacion
 	 * @param motor, tipo motor
+	 * @throws OperacionNoValidaException, si algun dato es incorrecto
 	 */
-	public Vehiculo(long id, String matricula, LocalDate fechaMatriculacion, TipoMotor motor) {
+	public Vehiculo(long id, String matricula, LocalDate fechaMatriculacion, TipoMotor motor) throws OperacionNoValidaException {
+		if (id < 0 || matricula == null || fechaMatriculacion.isAfter(LocalDate.now()) || fechaMatriculacion == null || motor == null) {
+			throw new OperacionNoValidaException("ERROR: datos introducidos no válidos");
+		}
+		
 		this.id = id;
 		this.matricula = matricula;
 		this.fechaMatriculacion = fechaMatriculacion;

@@ -22,7 +22,9 @@ public class Turismo extends Vehiculo {
 	 */
 	public Turismo(long id, String matricula, LocalDate fechaMatriculacion, TipoMotor motor, double potencia) {
 		super(id, matricula, fechaMatriculacion, motor);
-
+		if (potencia <= 0) {
+			throw new OperacionNoValidaException("ERROR: datos introducidos no válidos");
+		}
 		this.potencia = potencia;
 	}
 
