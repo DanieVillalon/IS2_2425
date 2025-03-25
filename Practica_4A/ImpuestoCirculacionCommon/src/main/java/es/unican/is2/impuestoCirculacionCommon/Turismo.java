@@ -19,8 +19,9 @@ public class Turismo extends Vehiculo {
 	 * @param fechaMatriculacion, fecha de matriculación del turismo
 	 * @param motor, tipo de motor del turismo
 	 * @param potencia, potencia total del turismo
+	 * @throws OperacionNoValidaException, si hay algun dato no valido
 	 */
-	public Turismo(long id, String matricula, LocalDate fechaMatriculacion, TipoMotor motor, double potencia) {
+	public Turismo(long id, String matricula, LocalDate fechaMatriculacion, TipoMotor motor, double potencia) throws OperacionNoValidaException {
 		super(id, matricula, fechaMatriculacion, motor);
 		if (potencia <= 0) {
 			throw new OperacionNoValidaException("ERROR: datos introducidos no válidos");

@@ -22,7 +22,7 @@ public abstract class Vehiculo {
 	 * @param fechaMatriculacion, fecha de su primera matriculacion
 	 * @param motor, tipo motor
 	 * @throws OperacionNoValidaException, si algun dato es incorrecto
-	 * @throws NullPointerException
+	 * @throws OperacionNoValidaException, si hay algun dato no valido
 	 */
 	public Vehiculo(long id, String matricula, LocalDate fechaMatriculacion, TipoMotor motor) throws OperacionNoValidaException, NullPointerException {
 		if (fechaMatriculacion == null || motor == null || matricula == null) {

@@ -35,20 +35,48 @@ public class VistaFuncionarioIT {
 	
 	@Test
 	public void test() {
+		//Comprobar el aspecto de la interfaz
 		iut.button("btnBuscar").requireText("Buscar");
-		iut.textBox("txtDniContribuyente").enterText("1111AAA");
+		
+		
+		//Comprobar Caso Válido
+		iut.textBox("txtDniContribuyente").enterText("11111111AAA");
 		iut.button("btnBuscar").click();
+		
 		iut.textBox("txtNombreContribuyente").requireText("Juan Perez Lopez");
 		
-		iut.textBox("txtDniContribuyente").enterText("1111AAA");
-		iut.
+		iut.list("listMatriculasVehiculos").selectItems(0);
+		iut.list("listMatriculasVehiculos").requireSelectedItems("1111AAA");
 		
+		iut.list("listMatriculasVehiculos").selectItems(0);
+		iut.list("listMatriculasVehiculos").requireSelectedItems("1111BBB");
 		
+		iut.list("listMatriculasVehiculos").selectItems(0);
+		iut.list("listMatriculasVehiculos").requireSelectedItems("1111BBB");
 		
+		iut.textBox("txtTotalContribuyente").requireText("206,75");
+
 		
+		//Caso no valido
 		
+		iut.textBox("txtDniContribuyente").enterText("12345678AAA");
+		iut.button("btnBuscar").click();
 		
+		iut.textBox("txtNombreContribuyente").requireText("DNI Incorrecto");
 		
+		iut.list("listMatriculasVehiculos").requireItemCount(0);
+	
+		iut.textBox("txtTotalContribuyente").requireText("0");
+
+
+		
+		// Sleep para visualizar como se realiza el test
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
