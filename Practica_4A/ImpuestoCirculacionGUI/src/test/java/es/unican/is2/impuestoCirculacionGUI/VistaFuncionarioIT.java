@@ -18,12 +18,14 @@ public class VistaFuncionarioIT {
 	
 	private FrameFixture iut;			//Interface Under Test
 	
-	//COmponentes capa DAO
-	ContribuyentesDAO contribuyentesDAO = new ContribuyentesDAO();
-	VehiculosDAO vehiculosDAO = new VehiculosDAO();
+	
 	
 	@BeforeEach
 	public void setUp() {
+		//Componentes capa DAO
+		ContribuyentesDAO contribuyentesDAO = new ContribuyentesDAO();
+		VehiculosDAO vehiculosDAO = new VehiculosDAO();
+		
 		//Componentes capa negocio
 		GestionImpuestoCirculacion info = new GestionImpuestoCirculacion(contribuyentesDAO, vehiculosDAO);
 		
@@ -56,16 +58,17 @@ public class VistaFuncionarioIT {
 		iut.list("listMatriculasVehiculos").selectItems(0);
 		iut.list("listMatriculasVehiculos").requireSelectedItems("1111AAA");
 		
-		iut.list("listMatriculasVehiculos").selectItems(0);
+		iut.list("listMatriculasVehiculos").selectItems(1);
 		iut.list("listMatriculasVehiculos").requireSelectedItems("1111BBB");
 		
-		iut.list("listMatriculasVehiculos").selectItems(0);
+		iut.list("listMatriculasVehiculos").selectItems(2);
 		iut.list("listMatriculasVehiculos").requireSelectedItems("1111CCC");
 		
 		iut.textBox("txtTotalContribuyente").requireText("206,75");
 
 		
 		//Caso no valido
+		iut.textBox("txtDniContribuyente").deleteText();
 		iut.textBox("txtDniContribuyente").enterText("12345678A");
 		iut.button("btnBuscar").click();
 		iut.textBox("txtNombreContribuyente").requireText("DNI Incorrecto");
