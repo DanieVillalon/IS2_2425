@@ -1,8 +1,5 @@
 package es.unican.is2.impuestoCirculacionGUI;
 
-import java.util.List;
-import javax.swing.JTextField;
-
 import org.fest.swing.fixture.FrameFixture;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +10,7 @@ import es.unican.is2.impuestoCirculacionDAOH2.ContribuyentesDAO;
 import es.unican.is2.impuestoCirculacionDAOH2.VehiculosDAO;
 
 
+
 /**
  * Pruebas de la interfaz de usuario destinada al funcionario.
  */
@@ -20,10 +18,18 @@ public class VistaFuncionarioIT {
 	
 	private FrameFixture iut;			//Interface Under Test
 	
+	//COmponentes capa DAO
+	ContribuyentesDAO contribuyentesDAO = new ContribuyentesDAO();
+	VehiculosDAO vehiculosDAO = new VehiculosDAO();
+	
 	@BeforeEach
 	public void setUp() {
-		GestionImpuestoCirculacion info = new GestionImpuestoCirculacion(new ContribuyentesDAO(), new VehiculosDAO());
+		//Componentes capa negocio
+		GestionImpuestoCirculacion info = new GestionImpuestoCirculacion(contribuyentesDAO, vehiculosDAO);
+		
+		//Componentes capa presentacion
 		VistaFuncionario gui = new VistaFuncionario(info);		//Creación de la interfaz
+		
 		iut = new FrameFixture(gui);
 		gui.setVisible(true);
 	}
@@ -40,9 +46,11 @@ public class VistaFuncionarioIT {
 		
 		
 		//Comprobar Caso Válido
-		iut.textBox("txtDniContribuyente").enterText("11111111AAA");
+		//Introducimos un DNI
+		iut.textBox("txtDniContribuyente").enterText("11111111A");
+		// Pulsamos el boton BUscar
 		iut.button("btnBuscar").click();
-		
+		// Comprobamos la salida
 		iut.textBox("txtNombreContribuyente").requireText("Juan Perez Lopez");
 		
 		iut.list("listMatriculasVehiculos").selectItems(0);
@@ -52,20 +60,16 @@ public class VistaFuncionarioIT {
 		iut.list("listMatriculasVehiculos").requireSelectedItems("1111BBB");
 		
 		iut.list("listMatriculasVehiculos").selectItems(0);
-		iut.list("listMatriculasVehiculos").requireSelectedItems("1111BBB");
+		iut.list("listMatriculasVehiculos").requireSelectedItems("1111CCC");
 		
 		iut.textBox("txtTotalContribuyente").requireText("206,75");
 
 		
 		//Caso no valido
-		
-		iut.textBox("txtDniContribuyente").enterText("12345678AAA");
+		iut.textBox("txtDniContribuyente").enterText("12345678A");
 		iut.button("btnBuscar").click();
-		
 		iut.textBox("txtNombreContribuyente").requireText("DNI Incorrecto");
-		
 		iut.list("listMatriculasVehiculos").requireItemCount(0);
-	
 		iut.textBox("txtTotalContribuyente").requireText("0");
 
 
