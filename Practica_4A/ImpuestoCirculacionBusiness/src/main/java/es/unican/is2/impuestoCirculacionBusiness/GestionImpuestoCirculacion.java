@@ -33,7 +33,7 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 			return null;
 		}
 		Contribuyente c = daoDeContribuyentes.contribuyente(dni);
-		if (c.getVehiculos().isEmpty()) {
+		if (!c.getVehiculos().isEmpty()) {
 			throw new OperacionNoValidaException("ERROR: El contribuyente con el DNI indicado, tiene vehiculos asociados a su nombre y no se puede dar de baja"); 
 		}
 		return daoDeContribuyentes.eliminaContribuyente(dni);
@@ -50,6 +50,7 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 		Contribuyente c = daoDeContribuyentes.contribuyente(dni);
 		daoDeVehiculos.creaVehiculo(v);
 		c.anhadeVehiculo(v);
+		daoDeContribuyentes.actualizaContribuyente(c);
 		return v;
 	}
 	
@@ -67,6 +68,7 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 		Vehiculo v = daoDeVehiculos.vehiculoPorMatricula(matricula);
 		c.eliminaVehiculo(v);
 		daoDeVehiculos.eliminaVehiculo(matricula);
+		daoDeContribuyentes.actualizaContribuyente(c);
 		return v;
 	} 
 	
@@ -97,11 +99,12 @@ public class GestionImpuestoCirculacion implements IInfoImpuestoCirculacion, IGe
 		
 		cA.eliminaVehiculo(v);
 		cN.anhadeVehiculo(v);	
+		daoDeContribuyentes.actualizaContribuyente(cA);
+		daoDeContribuyentes.actualizaContribuyente(cN);
 		return true;
 	} 
 	
 	public Contribuyente contribuyente(String dni) throws DataAccessException {
-		
 		return daoDeContribuyentes.contribuyente(dni);
 	}
 	

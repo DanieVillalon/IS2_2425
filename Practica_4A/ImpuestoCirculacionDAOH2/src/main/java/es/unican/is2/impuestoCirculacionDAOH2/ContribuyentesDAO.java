@@ -87,14 +87,38 @@ public class ContribuyentesDAO implements IContribuyentesDAO {
 
 	@Override
 	public Contribuyente actualizaContribuyente(Contribuyente nuevo) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		String updateStatement = String.format(
+	            "update Contribuyentes set nombre = '%s', apellido1 = '%s', apellido2 = '%s' where dni = '%s'",
+	            nuevo.getNombre(),
+	            nuevo.getApellido1(),
+	            nuevo.getApellido2(),
+	            nuevo.getDni());
+
+	    H2ServerConnectionManager.executeSqlStatement(updateStatement);
+	    return nuevo;
 	}
 
 	@Override
 	public Contribuyente eliminaContribuyente(String dni) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		Contribuyente contribuyenteEliminado = contribuyente(dni);  // Obtener el contribuyente antes de eliminarlo
+
+	    if (contribuyenteEliminado == null) {
+	        throw new DataAccessException();
+	    }
+
+	    // Primero eliminamos los vehículos asociados al contribuyente
+	    String deleteVehiculosStatement = String.format(
+	            "delete from Vehiculos where contribuyente_FK = '%s'", dni);
+
+	    String deleteContribuyenteStatement = String.format(
+	            "delete from Contribuyentes where dni = '%s'", dni);
+
+	    // Eliminar vehículos
+		H2ServerConnectionManager.executeSqlStatement(deleteVehiculosStatement);
+		// Eliminar el contribuyente
+		H2ServerConnectionManager.executeSqlStatement(deleteContribuyenteStatement);
+
+	    return contribuyenteEliminado; 
 	}
 
 }

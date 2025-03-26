@@ -121,10 +121,10 @@ public class VistaFuncionario extends JFrame {
 		try {
 			c = info.contribuyente(dni);
 			if (c != null) {
-				txtNombreContribuyente.setText(c.getNombre() + " " + c.getApellido2() + " " + c.getApellido1());
+				txtNombreContribuyente.setText(c.getNombre() + " " + c.getApellido1() + " " + c.getApellido2());
 				txtTotalContribuyente.setText(df.format(c.totalImpuestoCirculacion()));
 				listModel.removeAllElements();
-				for (int i = 1; i < c.getVehiculos().size(); i++) {
+				for (int i = 0; i < c.getVehiculos().size(); i++) {
 					Vehiculo v = c.getVehiculos().get(i);
 					listModel.addElement(v.getMatricula());
 				}
