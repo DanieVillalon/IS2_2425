@@ -16,9 +16,7 @@ public class ListaOrdenadaTest {
 		sut = new ListaOrdenada<>();
 	}
 
-    // En este test se codifican los casos de prueba de encola,
-    // primerElemento y numElementos, pues para comprobar el
-    // resultado del encola es necesario usar los otros dos métodos
+  
     @Test
     public void testAddSizeGet() {
 
@@ -34,19 +32,19 @@ public class ListaOrdenadaTest {
         //CP 4
         sut.add(3);
         assertEquals(2, sut.size());	//CP 10
-        assertEquals(4, sut.get(0));	//CP 1
-        assertEquals(3, sut.get(1));	
+        assertEquals(3, sut.get(0));	//CP 1
+        assertEquals(4, sut.get(1));	
         
-        // [4,3]
+        // [3, 4]
 
         //CP 3
         assertThrows(IndexOutOfBoundsException.class, () -> sut.get(4));
         
-        //CP 13
+        //CP 14
         assertThrows(IndexOutOfBoundsException.class, () -> sut.get(-1));
         
         
-        // CP 14
+        // CP 15
         assertThrows(NullPointerException.class, () -> sut.add(null));
     }
     
@@ -63,15 +61,15 @@ public class ListaOrdenadaTest {
     	assertEquals(0, sut.size());	//Comprueba que la cola queda vacía
     	
     	//CP 6
+    	sut.add(3);
     	sut.add(1);
     	sut.add(2);
-    	sut.add(3);
     	assertEquals(1, sut.remove(0));
     	
     	//CP 7
     	assertThrows(IndexOutOfBoundsException.class, () -> sut.remove(4));
 
-    	//CP 15
+    	//CP 16
     	assertThrows(IndexOutOfBoundsException.class, () -> sut.remove(-1));
     	
     }
@@ -85,9 +83,9 @@ public class ListaOrdenadaTest {
     	sut.clear();
     	assertEquals(0, sut.size());
     	
-    	//CP 12
-    	sut.add(1);
+    	//CP 12    	
     	sut.add(2);
+    	sut.add(1);
     	sut.add(3);
     	assertEquals(3, sut.size());    	
     	sut.clear();
