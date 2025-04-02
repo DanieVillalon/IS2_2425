@@ -6,13 +6,13 @@ public class Debito extends Tarjeta {
 	
 	private double saldoDiarioDisponible;
 
-	public Debito(String numero, String titular, String cvc, CuentaAhorro cuentaAsociada) {
+	public Debito(String numero, String titular, String cvc, CuentaAhorro cuentaAsociada) {	//CC: 1
 		super(numero, titular, cvc, cuentaAsociada);
 		saldoDiarioDisponible = cuentaAsociada.getLimiteDebito();
 	}
 
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {
+	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {	//CC: 2
 		if (saldoDiarioDisponible<x) {
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		}
@@ -21,7 +21,8 @@ public class Debito extends Tarjeta {
 	}
 	
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {
+	public void pagoEnEstablecimiento(String datos, double x) 
+			throws saldoInsuficienteException, datoErroneoException {						//CC: 2
 		if (saldoDiarioDisponible<x) {
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		}
@@ -29,18 +30,18 @@ public class Debito extends Tarjeta {
 		saldoDiarioDisponible-=x;
 	}
 	
-	public LocalDate getCaducidadDebito() {
+	public LocalDate getCaducidadDebito() {													//CC: 1
 		return this.cuentaAsociada.getCaducidadDebito();
 	}
 	
 	/**
 	 * Metodo invocado automaticamente a las 00:00 de cada dia
 	 */
-	public void restableceSaldo() {
+	public void restableceSaldo() {															//CC: 1
 		saldoDiarioDisponible = cuentaAsociada.getLimiteDebito();
 	}
 	
-	public CuentaAhorro getCuentaAsociada() {
+	public CuentaAhorro getCuentaAsociada() {												//CC: 1
 		return cuentaAsociada;
 	}
 

@@ -12,7 +12,7 @@ public class Credito extends Tarjeta {
 	private List<Movimiento> historicoMovimientos;
 
 	public Credito(String numero, String titular, String cvc,
-			CuentaAhorro cuentaAsociada, double credito) {
+			CuentaAhorro cuentaAsociada, double credito) { //CC: 1
 		super(numero, titular, cvc, cuentaAsociada);
 		this.credito = credito;
 	}
@@ -24,7 +24,7 @@ public class Credito extends Tarjeta {
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {
+	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {	//CC: 3
 		if (x<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
@@ -43,7 +43,8 @@ public class Credito extends Tarjeta {
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {
+	public void pagoEnEstablecimiento(String datos, double x) 
+			throws saldoInsuficienteException, datoErroneoException {		//CC: 3
 		if (x<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
@@ -58,7 +59,7 @@ public class Credito extends Tarjeta {
 		MovimientosMensuales.add(m);
 	}
 	
-    private double getGastosAcumulados() {
+    private double getGastosAcumulados() {			//CC: 2
 		double r = 0.0;
 		for (int i = 0; i < this.MovimientosMensuales.size(); i++) {
 			Movimiento m = (Movimiento) MovimientosMensuales.get(i);
@@ -68,14 +69,14 @@ public class Credito extends Tarjeta {
 	}
 	
 	
-	public LocalDate getCaducidadCredito() {
+	public LocalDate getCaducidadCredito() {		//CC: 1
 		return this.cuentaAsociada.getCaducidadCredito();
 	}
 
 	/**
 	 * Metodo que se invoca automaticamente el dia 1 de cada mes
 	 */
-	public void liquidar() {
+	public void liquidar() {						//CC: 3
 		Movimiento liq = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		liq.setF(now);
@@ -94,15 +95,15 @@ public class Credito extends Tarjeta {
 		MovimientosMensuales.clear();
 	}
 
-	public List<Movimiento> getMovimientosMensuales() {
+	public List<Movimiento> getMovimientosMensuales() {	//CC: 1
 		return MovimientosMensuales;
 	}
 	
-	public CuentaAhorro getCuentaAsociada() {
+	public CuentaAhorro getCuentaAsociada() {			//CC: 1
 		return cuentaAsociada;
 	}
 	
-	public List<Movimiento> getMovimientos() {
+	public List<Movimiento> getMovimientos() {			//CC: 1
 		return historicoMovimientos;
 	}
 

@@ -17,7 +17,7 @@ public class Cliente {
     private List<Tarjeta> tarjetas = new LinkedList<Tarjeta>();
 
  	public Cliente(String titular, String calle, String zip, String localidad, 
- 			String telefono, String dni) {  
+ 			String telefono, String dni) {  //CC: 1		CCog: 0
 		this.nombre = titular;
 		this.calle = calle;
 		this.zip = zip;
@@ -26,17 +26,17 @@ public class Cliente {
 		this.dni = dni;
 	}
 	
-	public void cambiaDireccion(String calle, String zip, String localidad) {
+	public void cambiaDireccion(String calle, String zip, String localidad) {	//CC: 1 CCog: 0
 		this.calle = calle;
 		this.zip = zip;
 		this.localidad = localidad;
 	}
 	
-	public void anhadeCuenta(Cuenta c) {
+	public void anhadeCuenta(Cuenta c) {	//CC: 1	CCog: 0
 		Cuentas.add(c);
 	}
 	
-	public void anhadeTarjeta(Tarjeta t) {
+	public void anhadeTarjeta(Tarjeta t) {	//CC: 2	CCog: 2
 		tarjetas.add(t);
 		if (t instanceof Debito) {
 			Debito td = (Debito)t;
@@ -47,7 +47,7 @@ public class Cliente {
 		}
 	}
 	
-	public double getSaldoTotal() {
+	public double getSaldoTotal() {			//CC: 5	CCog: 7
 		double total = 0.0;
 		for (Cuenta c: Cuentas) {  
 			if (c instanceof CuentaAhorro) {
@@ -61,27 +61,27 @@ public class Cliente {
 		return total;
 	}
 	
-	public String getNombre() {
+	public String getNombre() {		//CC: 1 CCog: 0
 		return nombre;
 	}
 
-	public String getCalle() {
+	public String getCalle() {		//CC: 1	CCog: 0
 		return calle;
 	}
 
-	public String getZip() {
+	public String getZip() {		//CC: 1	CCog: 0
 		return zip;
 	}
 
-	public String getLocalidad() {
+	public String getLocalidad() {	//CC: 1	CCog: 0
 		return localidad;
 	}
 
-	public String getTelefono() {
+	public String getTelefono() {	//CC: 1 CCog: 0
 		return telefono;
 	}
 
-	public String getDni() {
+	public String getDni() {		//CC: 1 CCog: 0
 		return dni;
 	}
 	
