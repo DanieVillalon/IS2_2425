@@ -39,3 +39,13 @@ public class ListaOrdenada<E extends Comparable<E>> implements IListaOrdenada<E>
 		lista.clear();
 	}
 }
+
+
+
+
+
+
+
+
+
+
