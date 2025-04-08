@@ -1,33 +1,34 @@
+package es.unican.is2.BancoUC;
 
 
 import java.time.LocalDateTime;
 
-public class Movimiento {					//CC: 1
+public class Movimiento {					//CCogn: 0
 	private String concepto;
 	private LocalDateTime fecha;
 	private double importe;
 
-	public double getI() {					//CC: 1
+	public double getI() {					//CC: 1		CCog: 0
 		return importe;
 	}
 
-	public void setI(double newMImporte) {	//CC: 1
+	public void setI(double newMImporte) {	//CC: 1		CCog: 0
 		importe = newMImporte;
 	}
 	
-	public String getC() {					//CC: 1
+	public String getC() {					//CC: 1		CCog: 0
 		return concepto;
 	}
 
-	public void setC(String newMConcepto) {	//CC: 1
+	public void setC(String newMConcepto) {	//CC: 1		CCog: 0
 		concepto = newMConcepto;
 	}
 
-	public LocalDateTime getF() {	//CC: 1
+	public LocalDateTime getF() {			//CC: 1		CCog: 0
 		return fecha;
 	}
 
-	public void setF(LocalDateTime newMFecha) {	//CC: 1
+	public void setF(LocalDateTime newMFecha) {	//CC: 1		CCog: 0
 		fecha = newMFecha;
 	}
 

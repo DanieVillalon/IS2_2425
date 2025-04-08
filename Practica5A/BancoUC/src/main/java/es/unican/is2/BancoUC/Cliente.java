@@ -1,9 +1,10 @@
+package es.unican.is2.BancoUC;
 
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Cliente {
+public class Cliente {		//CCogn: 0'8182
 	
 	public String nombre;
 	public String calle;

@@ -1,3 +1,4 @@
+package es.unican.is2.BancoUC;
 
 
 import java.time.LocalDate;
@@ -5,14 +6,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-public class Credito extends Tarjeta {
+public class Credito extends Tarjeta {		//CCogn: 0'888
 	
 	private double credito;
 	private List<Movimiento> MovimientosMensuales;
 	private List<Movimiento> historicoMovimientos;
 
 	public Credito(String numero, String titular, String cvc,
-			CuentaAhorro cuentaAsociada, double credito) { //CC: 1
+			CuentaAhorro cuentaAsociada, double credito) { //CC: 1		CCog:0
 		super(numero, titular, cvc, cuentaAsociada);
 		this.credito = credito;
 	}
@@ -24,7 +25,7 @@ public class Credito extends Tarjeta {
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {	//CC: 3
+	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {	//CC: 3		CCog: 3
 		if (x<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
@@ -44,7 +45,7 @@ public class Credito extends Tarjeta {
 
 	@Override
 	public void pagoEnEstablecimiento(String datos, double x) 
-			throws saldoInsuficienteException, datoErroneoException {		//CC: 3
+			throws saldoInsuficienteException, datoErroneoException {		//CC: 3		CCog: 2
 		if (x<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
@@ -59,7 +60,7 @@ public class Credito extends Tarjeta {
 		MovimientosMensuales.add(m);
 	}
 	
-    private double getGastosAcumulados() {			//CC: 2
+    private double getGastosAcumulados() {			//CC: 2		CCog: 1
 		double r = 0.0;
 		for (int i = 0; i < this.MovimientosMensuales.size(); i++) {
 			Movimiento m = (Movimiento) MovimientosMensuales.get(i);
@@ -69,14 +70,14 @@ public class Credito extends Tarjeta {
 	}
 	
 	
-	public LocalDate getCaducidadCredito() {		//CC: 1
+	public LocalDate getCaducidadCredito() {		//CC: 1		CCog: 0
 		return this.cuentaAsociada.getCaducidadCredito();
 	}
 
 	/**
 	 * Metodo que se invoca automaticamente el dia 1 de cada mes
 	 */
-	public void liquidar() {						//CC: 3
+	public void liquidar() {						//CC: 3		CCog: 2
 		Movimiento liq = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		liq.setF(now);
@@ -95,15 +96,15 @@ public class Credito extends Tarjeta {
 		MovimientosMensuales.clear();
 	}
 
-	public List<Movimiento> getMovimientosMensuales() {	//CC: 1
+	public List<Movimiento> getMovimientosMensuales() {	//CC: 1		CCog: 0
 		return MovimientosMensuales;
 	}
 	
-	public CuentaAhorro getCuentaAsociada() {			//CC: 1
+	public CuentaAhorro getCuentaAsociada() {			//CC: 1		CCog: 0
 		return cuentaAsociada;
 	}
 	
-	public List<Movimiento> getMovimientos() {			//CC: 1
+	public List<Movimiento> getMovimientos() {			//CC: 1		CCog: 0
 		return historicoMovimientos;
 	}
 
