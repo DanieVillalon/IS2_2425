@@ -67,6 +67,7 @@ public class CuentaAhorro extends Cuenta {
 		this.Movimientos.add(m);
 	}
 
+	@Override
 	public double getSaldo() {
 		double r = 0.0;
 		for (int i = 0; i < this.Movimientos.size(); i++) {

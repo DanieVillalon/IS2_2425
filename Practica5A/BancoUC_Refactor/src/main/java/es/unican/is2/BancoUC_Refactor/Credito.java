@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Credito extends Tarjeta {
 	
+	private static final double COMISION = 0.05;
 	private double credito;
 	private List<Movimiento> MovimientosMensuales;
 	private List<Movimiento> historicoMovimientos;
@@ -20,23 +21,21 @@ public class Credito extends Tarjeta {
 
 	/**
 	 * Retirada de dinero en cajero con la tarjeta
-	 * @param x Cantidad a retirar. Se aplica una comisi�n del 5%.
+	 * @param importe Cantidad a retirar. Se aplica una comisi�n del 5%.
 	 * @throws saldoInsuficienteException
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {
-		if (x<0)
+	public void retirar(double importe) throws saldoInsuficienteException, datoErroneoException {
+		if (importe<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
-		Movimiento m = new Movimiento();
-		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC("Retirada en cajero");
-		x += x * 0.05; // Comision por operacion con tarjetas credito
-		m.setI(-x);
 		
-		if (getGastosAcumulados()+x > credito)
+		String c = "Retirada en cajero";
+		importe += importe * COMISION; // Comision por operacion con tarjetas credito (Refactorizado como constante)
+		Movimiento m = nuevoMovimiento(c, importe);
+
+		if (getGastosAcumulados()+importe > credito)
 			throw new saldoInsuficienteException("Credito insuficiente");
 		else {
 			MovimientosMensuales.add(m);
@@ -44,19 +43,31 @@ public class Credito extends Tarjeta {
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {
-		if (x<0)
+	public void pagoEnEstablecimiento(String datos, double importe) throws saldoInsuficienteException, datoErroneoException {
+		if (importe<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
-		if (getGastosAcumulados() + x > credito)
+		if (getGastosAcumulados() + importe > credito)
 			throw new saldoInsuficienteException("Saldo insuficiente");
-		
+
+		String c = "Compra a credito en: " + datos;
+		Movimiento m = nuevoMovimiento(c, importe);
+		MovimientosMensuales.add(m);
+	}
+
+	/**
+	 * Refactorizado: código común a pagoEnEstablecimiento() y retirar()
+	 * @param concepto Concepto asociado al movimiento
+	 * @param importe Importe retirado de la cuenta
+	 * @return m el movimiento realizado
+	 */
+	private Movimiento nuevoMovimiento(String concepto, double importe) {
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		m.setF(now);
-		m.setC("Compra a credito en: " + datos);
-		m.setI(-x);
-		MovimientosMensuales.add(m);
+		m.setC(concepto);
+		m.setI(-importe);
+		return m;
 	}
 	
     private double getGastosAcumulados() {

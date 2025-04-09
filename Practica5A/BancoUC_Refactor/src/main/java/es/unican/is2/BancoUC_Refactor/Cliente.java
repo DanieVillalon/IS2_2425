@@ -7,9 +7,7 @@ import java.util.List;
 public class Cliente {
 	
 	public String nombre;
-	public String calle;
-	public String zip;
-	public String localidad;
+	public Direccion direccion;	//Refactorizado: extract class -> Direccion
 	public String telefono;
 	public String dni;
 	
@@ -17,26 +15,25 @@ public class Cliente {
     
     private List<Tarjeta> tarjetas = new LinkedList<Tarjeta>();
 
- 	public Cliente(String titular, String calle, String zip, String localidad, 
+ 	public Cliente(String titular, String calle, String cp, String localidad, 
  			String telefono, String dni) {  
 		this.nombre = titular;
-		this.calle = calle;
-		this.zip = zip;
-		this.localidad = localidad;
+		this.direccion = new Direccion(calle, cp, localidad);
 		this.telefono = telefono;
 		this.dni = dni;
 	}
 	
-	public void cambiaDireccion(String calle, String zip, String localidad) {
-		this.calle = calle;
-		this.zip = zip;
-		this.localidad = localidad;
+	public void cambiaDireccion(String calle, String cp, String localidad) {
+		this.direccion = new Direccion(calle, cp, localidad);
 	}
 	
 	public void anhadeCuenta(Cuenta c) {
 		Cuentas.add(c);
 	}
 	
+	/**
+	 * TODO: ¿Refactorizar?
+	 */
 	public void anhadeTarjeta(Tarjeta t) {
 		tarjetas.add(t);
 		if (t instanceof Debito) {
@@ -48,34 +45,32 @@ public class Cliente {
 		}
 	}
 	
+	/**
+	 * Refactorizado: funcionalidad extraída a la clase Cuenta
+	 */
 	public double getSaldoTotal() {
 		double total = 0.0;
 		for (Cuenta c: Cuentas) {  
-			if (c instanceof CuentaAhorro) {
-				total += ((CuentaAhorro) c).getSaldo();
-			} else if (c instanceof CuentaValores)  {
-				for (Valor v: ((CuentaValores) c).getValores()) {
-					total += v.getCotizacion()*v.getNumValores();
-				}
-			}
+			total = c.getSaldo();
 		}
 		return total;
 	}
+
 	
 	public String getNombre() {
 		return nombre;
 	}
 
 	public String getCalle() {
-		return calle;
+		return direccion.getCalle();
 	}
 
 	public String getZip() {
-		return zip;
+		return direccion.getCp();
 	}
 
 	public String getLocalidad() {
-		return localidad;
+		return direccion.getLocalidad();
 	}
 
 	public String getTelefono() {
@@ -85,7 +80,6 @@ public class Cliente {
 	public String getDni() {
 		return dni;
 	}
-	
 	
 	
 }

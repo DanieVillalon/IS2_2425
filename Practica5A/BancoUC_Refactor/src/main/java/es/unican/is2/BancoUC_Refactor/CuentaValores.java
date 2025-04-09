@@ -25,5 +25,14 @@ public class CuentaValores extends Cuenta {
 		valores.add(valor);
 		return true;
 	}
+
+	@Override
+	public double getSaldo() {
+		double total = 0;
+		for (Valor v: valores) {
+			total += v.getCotizacion()*v.getNumValores();
+		}
+		return total;
+	}
 	
 }

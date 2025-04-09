@@ -1,7 +1,7 @@
 package es.unican.is2.BancoUC_Refactor;
 
-
-public class Cuenta {
+//Refactorizado: cuenta abstracta
+public abstract class Cuenta {
 	
 	private String numCuenta;
 	
@@ -12,5 +12,6 @@ public class Cuenta {
 	public String getNumCuenta() {
 		return numCuenta;
 	}
-	
+
+	public abstract double getSaldo();
 }
