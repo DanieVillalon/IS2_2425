@@ -15,10 +15,9 @@ public class Cliente {
     
     private List<Tarjeta> tarjetas = new LinkedList<Tarjeta>();
 
- 	public Cliente(String titular, String calle, String cp, String localidad, 
- 			String telefono, String dni) {  
+ 	public Cliente(String titular, Direccion direccion, String telefono, String dni) {  //Refactorizado: extract class -> Direccion
 		this.nombre = titular;
-		this.direccion = new Direccion(calle, cp, localidad);
+		this.direccion = direccion;
 		this.telefono = telefono;
 		this.dni = dni;
 	}
