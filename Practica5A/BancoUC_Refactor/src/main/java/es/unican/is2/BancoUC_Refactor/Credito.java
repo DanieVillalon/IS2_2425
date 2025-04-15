@@ -27,47 +27,39 @@ public class Credito extends Tarjeta {
 	 */
 	@Override
 	public void retirar(double importe) throws saldoInsuficienteException, datoErroneoException {
-		if (importe<0)
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
-		
-		
-		String c = "Retirada en cajero";
+		String msgERR = "Credito insuficiente";
 		importe += importe * COMISION; // Comision por operacion con tarjetas credito (Refactorizado como constante)
-		Movimiento m = nuevoMovimiento(c, importe);
+		String c = "Retirada en cajero";
+		nuevoMovimiento(c, importe, msgERR);
 
-		if (getGastosAcumulados()+importe > credito)
-			throw new saldoInsuficienteException("Credito insuficiente");
-		else {
-			MovimientosMensuales.add(m);
-		}
 	}
 
 	@Override
 	public void pagoEnEstablecimiento(String datos, double importe) throws saldoInsuficienteException, datoErroneoException {
-		if (importe<0)
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
-		
-		if (getGastosAcumulados() + importe > credito)
-			throw new saldoInsuficienteException("Saldo insuficiente");
-
+		String msgERR = "Saldo insuficiente";
 		String c = "Compra a credito en: " + datos;
-		Movimiento m = nuevoMovimiento(c, importe);
-		MovimientosMensuales.add(m);
+		nuevoMovimiento(c, importe, msgERR);
 	}
 
 	/**
 	 * Refactorizado: código común a pagoEnEstablecimiento() y retirar()
 	 * @param concepto Concepto asociado al movimiento
 	 * @param importe Importe retirado de la cuenta
-	 * @return m el movimiento realizado
 	 */
-	private Movimiento nuevoMovimiento(String concepto, double importe) {
+	private void nuevoMovimiento(String concepto, double importe, String msgERR) {
+		if (importe<0)
+			throw new datoErroneoException("No se puede retirar una cantidad negativa");
+		
+		if (getGastosAcumulados() + importe > credito)
+			throw new saldoInsuficienteException(msgERR);
+		
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		m.setF(now);
 		m.setC(concepto);
 		m.setI(-importe);
-		return m;
+		MovimientosMensuales.add(m);
+
 	}
 	
     private double getGastosAcumulados() {

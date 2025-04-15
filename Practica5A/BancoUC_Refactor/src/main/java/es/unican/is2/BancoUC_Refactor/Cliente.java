@@ -11,7 +11,7 @@ public class Cliente {
 	public String telefono;
 	public String dni;
 	
-    private List<Cuenta> Cuentas = new LinkedList<Cuenta>();
+    private List<Cuenta> cuentas = new LinkedList<Cuenta>();
     
     private List<Tarjeta> tarjetas = new LinkedList<Tarjeta>();
 
@@ -28,12 +28,10 @@ public class Cliente {
 	}
 	
 	public void anhadeCuenta(Cuenta c) {
-		Cuentas.add(c);
+		cuentas.add(c);
 	}
 	
-	/**
-	 * TODO: ¿Refactorizar?
-	 */
+	
 	public void anhadeTarjeta(Tarjeta t) {
 		tarjetas.add(t);
 		if (t instanceof Debito) {
@@ -50,8 +48,8 @@ public class Cliente {
 	 */
 	public double getSaldoTotal() {
 		double total = 0.0;
-		for (Cuenta c: Cuentas) {  
-			total = c.getSaldo();
+		for (Cuenta c: cuentas) {  
+			total += c.getSaldo();
 		}
 		return total;
 	}
