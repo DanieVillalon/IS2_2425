@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>es.unican.is2</groupId>
-  <artifactId>BancoUC</artifactId>
+  <artifactId>BancoUC_Refactor</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>BancoUC</name>
+  <name>BancoUC_Refactor</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -15,37 +15,11 @@
   </properties>
 
   <dependencies>
-    
-    <dependency>
+      <dependency>
   		<groupId>org.junit.jupiter</groupId>
   		<artifactId>junit-jupiter</artifactId>
   		<version>5.9.2</version>
   	</dependency>
   	
   </dependencies>
-  
-  <build>
-  <plugins>
-  	<plugin>
-		<groupId>org.jacoco</groupId>
-		<artifactId>jacoco-maven-plugin</artifactId>
-		<version>0.8.13</version>
-		<executions>
-			<execution>
-				<goals>
-					<goal>prepare-agent</goal>
-				</goals>
-			</execution>
-			<execution>
-				<id>report</id>
-				<phase>test</phase>
-				<goals>
-					<goal>report</goal>
-				</goals>
-			</execution>
-		</executions>
-	</plugin>
-  </plugins>
- </build>
-  
 </project>
