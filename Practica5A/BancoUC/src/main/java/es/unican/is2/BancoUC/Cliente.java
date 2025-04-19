@@ -4,7 +4,14 @@ package es.unican.is2.BancoUC;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Cliente {		//CCogn: 0'8182
+
+/**
+ * Cálculo de métricas de complejidad:
+ *  - WMC = 1*9 + 2 + 5 = 16 (suma de las Complejidades ciclomáticas de todos los métodos de la clase)
+ *  - WMCn = WMC/n (Con n el número de métodos de la clase)
+ *  - CCogn = CCog/n (cálculo de CCog explicado en cada método)
+ */
+public class Cliente {		//CCog: 9	CCogn: 0'8182 (n = 11)
 	
 	public String nombre;
 	public String calle;
@@ -18,7 +25,7 @@ public class Cliente {		//CCogn: 0'8182
     private List<Tarjeta> tarjetas = new LinkedList<Tarjeta>();
 
  	public Cliente(String titular, String calle, String zip, String localidad, 
- 			String telefono, String dni) {  //CC: 1		CCog: 0
+ 			String telefono, String dni) {  //CC: 1		CCog: 0 (método completamente secuencial)
 		this.nombre = titular;
 		this.calle = calle;
 		this.zip = zip;
@@ -27,17 +34,17 @@ public class Cliente {		//CCogn: 0'8182
 		this.dni = dni;
 	}
 	
-	public void cambiaDireccion(String calle, String zip, String localidad) {	//CC: 1 CCog: 0
+	public void cambiaDireccion(String calle, String zip, String localidad) {	//CC: 1		CCog: 0 (completamente secuencial)
 		this.calle = calle;
 		this.zip = zip;
 		this.localidad = localidad;
 	}
 	
-	public void anhadeCuenta(Cuenta c) {	//CC: 1	CCog: 0
+	public void anhadeCuenta(Cuenta c) {	//CC: 1	CCog: 0	(completamente secuencial)
 		Cuentas.add(c);
 	}
 	
-	public void anhadeTarjeta(Tarjeta t) {	//CC: 2	CCog: 2
+	public void anhadeTarjeta(Tarjeta t) {	//CC: 2	CCog: 2 (1 if y 1 else)
 		tarjetas.add(t);
 		if (t instanceof Debito) {
 			Debito td = (Debito)t;
@@ -48,7 +55,7 @@ public class Cliente {		//CCogn: 0'8182
 		}
 	}
 	
-	public double getSaldoTotal() {			//CC: 5	CCog: 7
+	public double getSaldoTotal() {			//CC: 5	CCog: 7 (1 for con un if-elseif anidado (+2 +1) con un for anidado en el elseif (+3))
 		double total = 0.0;
 		for (Cuenta c: Cuentas) {  
 			if (c instanceof CuentaAhorro) {
@@ -62,30 +69,27 @@ public class Cliente {		//CCogn: 0'8182
 		return total;
 	}
 	
-	public String getNombre() {		//CC: 1 CCog: 0
+	public String getNombre() {		//CC: 1 CCog: 0	(completamente secuencial)
 		return nombre;
 	}
 
-	public String getCalle() {		//CC: 1	CCog: 0
+	public String getCalle() {		//CC: 1	CCog: 0 (completamente secuencial)
 		return calle;
 	}
 
-	public String getZip() {		//CC: 1	CCog: 0
+	public String getZip() {		//CC: 1	CCog: 0 (completamente secuencial)
 		return zip;
 	}
 
-	public String getLocalidad() {	//CC: 1	CCog: 0
+	public String getLocalidad() {	//CC: 1	CCog: 0 (completamente secuencial)
 		return localidad;
 	}
 
-	public String getTelefono() {	//CC: 1 CCog: 0
+	public String getTelefono() {	//CC: 1 CCog: 0 (completamente secuencial)
 		return telefono;
 	}
 
-	public String getDni() {		//CC: 1 CCog: 0
+	public String getDni() {		//CC: 1 CCog: 0 (completamente secuencial)
 		return dni;
 	}
-	
-	
-	
 }

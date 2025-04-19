@@ -6,14 +6,20 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-public class Credito extends Tarjeta {		//CCogn: 0'888
+/**
+ * Cálculo de métricas de complejidad:
+ *  - WMC = 1*5 + 2 + 3*3 = 16 (suma de las Complejidades ciclomáticas de todos los métodos de la clase)
+ *  - WMCn = WMC/n (Con n el número de métodos de la clase)
+ *  - CCogn = CCog/n (cálculo de CCog explicado en cada método)
+ */
+public class Credito extends Tarjeta {		//CCog: 8	CCogn: 0'888	(n = 9)
 	
 	private double credito;
 	private List<Movimiento> MovimientosMensuales;
 	private List<Movimiento> historicoMovimientos;
 
 	public Credito(String numero, String titular, String cvc,
-			CuentaAhorro cuentaAsociada, double credito) { //CC: 1		CCog:0
+			CuentaAhorro cuentaAsociada, double credito) { //CC: 1		CCog:0 (Completamente secuencial)
 		super(numero, titular, cvc, cuentaAsociada);
 		this.credito = credito;
 	}
@@ -25,7 +31,7 @@ public class Credito extends Tarjeta {		//CCogn: 0'888
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {	//CC: 3		CCog: 3
+	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {	//CC: 3		CCog: 3 (1 if y 1 if-else)
 		if (x<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
@@ -45,7 +51,7 @@ public class Credito extends Tarjeta {		//CCogn: 0'888
 
 	@Override
 	public void pagoEnEstablecimiento(String datos, double x) 
-			throws saldoInsuficienteException, datoErroneoException {		//CC: 3		CCog: 2
+			throws saldoInsuficienteException, datoErroneoException {		//CC: 3		CCog: 2 (2 if)
 		if (x<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
@@ -60,7 +66,7 @@ public class Credito extends Tarjeta {		//CCogn: 0'888
 		MovimientosMensuales.add(m);
 	}
 	
-    private double getGastosAcumulados() {			//CC: 2		CCog: 1
+    private double getGastosAcumulados() {			//CC: 2		CCog: 1 (1 bucle for)
 		double r = 0.0;
 		for (int i = 0; i < this.MovimientosMensuales.size(); i++) {
 			Movimiento m = (Movimiento) MovimientosMensuales.get(i);
@@ -70,14 +76,14 @@ public class Credito extends Tarjeta {		//CCogn: 0'888
 	}
 	
 	
-	public LocalDate getCaducidadCredito() {		//CC: 1		CCog: 0
+	public LocalDate getCaducidadCredito() {		//CC: 1		CCog: 0 (completamente secuencial)
 		return this.cuentaAsociada.getCaducidadCredito();
 	}
 
 	/**
 	 * Metodo que se invoca automaticamente el dia 1 de cada mes
 	 */
-	public void liquidar() {						//CC: 3		CCog: 2
+	public void liquidar() {						//CC: 3		CCog: 2 (1 if y 1 bucle for)
 		Movimiento liq = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		liq.setF(now);
