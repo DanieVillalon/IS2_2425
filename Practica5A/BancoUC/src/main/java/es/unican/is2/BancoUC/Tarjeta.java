@@ -1,13 +1,19 @@
 package es.unican.is2.BancoUC;
 
-
-public abstract class Tarjeta {	//CCogn: 0
+/**
+ * Cálculo de métricas de complejidad:
+ *  - WMC = 1 (suma de las Complejidades ciclomáticas de todos los métodos de la clase. Los métodos abstractos
+ *  no computan para el cálculo de la métrica)
+ *  - WMCn = WMC/n (Con n el número de métodos de la clase)
+ *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
+ */
+public abstract class Tarjeta {	//CCog: 0	CCogn: 0	(n = 1)
 	
 	protected String numero, titular, cvc;		
 	protected CuentaAhorro cuentaAsociada;
 
 	public Tarjeta(String numero, String titular, String cvc,
-			CuentaAhorro cuentaAsociada) {	//CC: 1		CCog: 0
+			CuentaAhorro cuentaAsociada) {	//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		this.numero = numero;
 		this.titular = titular;
 		this.cvc = cvc;

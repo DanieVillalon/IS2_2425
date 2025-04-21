@@ -10,7 +10,7 @@ import java.util.List;
  * Cálculo de métricas de complejidad:
  *  - WMC = 1*5 + 2 + 3*3 = 16 (suma de las Complejidades ciclomáticas de todos los métodos de la clase)
  *  - WMCn = WMC/n (Con n el número de métodos de la clase)
- *  - CCogn = CCog/n (cálculo de CCog explicado en cada método)
+ *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class Credito extends Tarjeta {		//CCog: 8	CCogn: 0'888	(n = 9)
 	
@@ -19,7 +19,7 @@ public class Credito extends Tarjeta {		//CCog: 8	CCogn: 0'888	(n = 9)
 	private List<Movimiento> historicoMovimientos;
 
 	public Credito(String numero, String titular, String cvc,
-			CuentaAhorro cuentaAsociada, double credito) { //CC: 1		CCog:0 (Completamente secuencial)
+			CuentaAhorro cuentaAsociada, double credito) { //CC: 1		CCog:0 (sólo sentencias secuenciales)
 		super(numero, titular, cvc, cuentaAsociada);
 		this.credito = credito;
 	}
@@ -76,7 +76,7 @@ public class Credito extends Tarjeta {		//CCog: 8	CCogn: 0'888	(n = 9)
 	}
 	
 	
-	public LocalDate getCaducidadCredito() {		//CC: 1		CCog: 0 (completamente secuencial)
+	public LocalDate getCaducidadCredito() {		//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		return this.cuentaAsociada.getCaducidadCredito();
 	}
 
@@ -102,15 +102,15 @@ public class Credito extends Tarjeta {		//CCog: 8	CCogn: 0'888	(n = 9)
 		MovimientosMensuales.clear();
 	}
 
-	public List<Movimiento> getMovimientosMensuales() {	//CC: 1		CCog: 0
+	public List<Movimiento> getMovimientosMensuales() {	//CC: 1		CCog: 0		(sólo sentencias secuenciales)
 		return MovimientosMensuales;
 	}
 	
-	public CuentaAhorro getCuentaAsociada() {			//CC: 1		CCog: 0
+	public CuentaAhorro getCuentaAsociada() {			//CC: 1		CCog: 0		(sólo sentencias secuenciales)
 		return cuentaAsociada;
 	}
 	
-	public List<Movimiento> getMovimientos() {			//CC: 1		CCog: 0
+	public List<Movimiento> getMovimientos() {			//CC: 1		CCog: 0		(sólo sentencias secuenciales)
 		return historicoMovimientos;
 	}
 

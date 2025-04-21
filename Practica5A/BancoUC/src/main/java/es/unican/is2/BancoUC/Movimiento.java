@@ -3,38 +3,44 @@ package es.unican.is2.BancoUC;
 
 import java.time.LocalDateTime;
 
-public class Movimiento {					//CCogn: 0
+/**
+ * Cálculo de métricas de complejidad:
+ *  - WMC = 1*7 = 7 (suma de las Complejidades ciclomáticas de todos los métodos de la clase)
+ *  - WMCn = WMC/n (Con n el número de métodos de la clase)
+ *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
+ */
+public class Movimiento {		//CCog: 0	CCogn: 0	(n = 7)
 	private String concepto;
 	private LocalDateTime fecha;
 	private double importe;
 
-	public double getI() {					//CC: 1		CCog: 0
+	public double getI() {					//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		return importe;
 	}
 
-	public void setI(double newMImporte) {	//CC: 1		CCog: 0
+	public void setI(double newMImporte) {	//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		importe = newMImporte;
 	}
 	
-	public String getC() {					//CC: 1		CCog: 0
+	public String getC() {					//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		return concepto;
 	}
 
-	public void setC(String newMConcepto) {	//CC: 1		CCog: 0
+	public void setC(String newMConcepto) {	//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		concepto = newMConcepto;
 	}
 
-	public LocalDateTime getF() {			//CC: 1		CCog: 0
+	public LocalDateTime getF() {			//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		return fecha;
 	}
 
-	public void setF(LocalDateTime newMFecha) {	//CC: 1		CCog: 0
+	public void setF(LocalDateTime newMFecha) {	//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		fecha = newMFecha;
 	}
 
 	
 	@Override
-	public boolean equals(Object obj) {		//CC: 1
+	public boolean equals(Object obj) {		//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		Movimiento other = (Movimiento)obj;
 		return (concepto.equals(other.concepto) && fecha.equals(other.fecha)&& importe==other.importe);
 	}

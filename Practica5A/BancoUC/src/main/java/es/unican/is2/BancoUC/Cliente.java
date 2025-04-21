@@ -9,7 +9,7 @@ import java.util.List;
  * Cálculo de métricas de complejidad:
  *  - WMC = 1*9 + 2 + 5 = 16 (suma de las Complejidades ciclomáticas de todos los métodos de la clase)
  *  - WMCn = WMC/n (Con n el número de métodos de la clase)
- *  - CCogn = CCog/n (cálculo de CCog explicado en cada método)
+ *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class Cliente {		//CCog: 9	CCogn: 0'8182 (n = 11)
 	
@@ -25,7 +25,7 @@ public class Cliente {		//CCog: 9	CCogn: 0'8182 (n = 11)
     private List<Tarjeta> tarjetas = new LinkedList<Tarjeta>();
 
  	public Cliente(String titular, String calle, String zip, String localidad, 
- 			String telefono, String dni) {  //CC: 1		CCog: 0 (método completamente secuencial)
+ 			String telefono, String dni) {  //CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		this.nombre = titular;
 		this.calle = calle;
 		this.zip = zip;
@@ -34,13 +34,13 @@ public class Cliente {		//CCog: 9	CCogn: 0'8182 (n = 11)
 		this.dni = dni;
 	}
 	
-	public void cambiaDireccion(String calle, String zip, String localidad) {	//CC: 1		CCog: 0 (completamente secuencial)
+	public void cambiaDireccion(String calle, String zip, String localidad) {	//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		this.calle = calle;
 		this.zip = zip;
 		this.localidad = localidad;
 	}
 	
-	public void anhadeCuenta(Cuenta c) {	//CC: 1	CCog: 0	(completamente secuencial)
+	public void anhadeCuenta(Cuenta c) {	//CC: 1	CCog: 0	(sólo sentencias secuenciales)
 		Cuentas.add(c);
 	}
 	
@@ -69,27 +69,27 @@ public class Cliente {		//CCog: 9	CCogn: 0'8182 (n = 11)
 		return total;
 	}
 	
-	public String getNombre() {		//CC: 1 CCog: 0	(completamente secuencial)
+	public String getNombre() {		//CC: 1 CCog: 0	(sólo sentencias secuenciales)
 		return nombre;
 	}
 
-	public String getCalle() {		//CC: 1	CCog: 0 (completamente secuencial)
+	public String getCalle() {		//CC: 1	CCog: 0 (sólo sentencias secuenciales)
 		return calle;
 	}
 
-	public String getZip() {		//CC: 1	CCog: 0 (completamente secuencial)
+	public String getZip() {		//CC: 1	CCog: 0 (sólo sentencias secuenciales)
 		return zip;
 	}
 
-	public String getLocalidad() {	//CC: 1	CCog: 0 (completamente secuencial)
+	public String getLocalidad() {	//CC: 1	CCog: 0 (sólo sentencias secuenciales)
 		return localidad;
 	}
 
-	public String getTelefono() {	//CC: 1 CCog: 0 (completamente secuencial)
+	public String getTelefono() {	//CC: 1 CCog: 0 (sólo sentencias secuenciales)
 		return telefono;
 	}
 
-	public String getDni() {		//CC: 1 CCog: 0 (completamente secuencial)
+	public String getDni() {		//CC: 1 CCog: 0 (sólo sentencias secuenciales)
 		return dni;
 	}
 }
