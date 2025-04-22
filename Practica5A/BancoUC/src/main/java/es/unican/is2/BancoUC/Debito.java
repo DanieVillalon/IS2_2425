@@ -9,6 +9,8 @@ import java.time.LocalDate;
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class Debito extends Tarjeta {	//CCog: 2	CCogn: 0'333	(n = 6)
+										//WMC: ∑CC = 8
+										//CBO: 0
 	
 	private double saldoDiarioDisponible;
 
@@ -40,7 +42,7 @@ public class Debito extends Tarjeta {	//CCog: 2	CCogn: 0'333	(n = 6)
 		return this.cuentaAsociada.getCaducidadDebito();
 	}
 	
-	/**
+	/**                                       
 	 * Metodo invocado automaticamente a las 00:00 de cada dia
 	 */
 	public void restableceSaldo() {															//CC: 1		CCog: 0 (sólo sentencias secuenciales)
@@ -51,4 +53,6 @@ public class Debito extends Tarjeta {	//CCog: 2	CCogn: 0'333	(n = 6)
 		return cuentaAsociada;
 	}
 
+	
+	
 }

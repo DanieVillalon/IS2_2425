@@ -7,6 +7,8 @@ package es.unican.is2.BancoUC;
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class Cuenta {	//CCog: 0 CCogn: 0	(n = 2)
+						//WMC: ∑CC = 2
+						//CBO: 1 (Cliente)
 	
 	private String numCuenta;
 	

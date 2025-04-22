@@ -10,11 +10,14 @@ import java.time.LocalDateTime;
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class Movimiento {		//CCog: 0	CCogn: 0	(n = 7)
+								//WMC: ∑CC = 7
+								//CBO: 2 (Credito y CuentaAhorro)
+	
 	private String concepto;
 	private LocalDateTime fecha;
 	private double importe;
 
-	public double getI() {					//CC: 1		CCog: 0 (sólo sentencias secuenciales)
+	public double getI() {	//CC: 1		CCog: 0 (sólo sentencias secuenciales)
 		return importe;
 	}
 

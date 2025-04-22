@@ -11,6 +11,8 @@ import java.util.List;
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class CuentaValores extends Cuenta {		//CCog: 3	CCogn: 1	(n = 3)
+												//WMC: ∑CC = 5
+												//CBO: 1 (Valor)
 
 	private List<Valor> valores;
 	

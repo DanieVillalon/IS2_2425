@@ -25,6 +25,7 @@ public class CuentaValoresTest {
 	public void testConstructor() {
 		assertTrue(sut.getNumCuenta().equals("794311"));
 		assertTrue(sut.getValores().size()==0);
+		assertEquals(sut.getSaldo(), 0.0);
 	}
 	
 	@Test
@@ -34,11 +35,14 @@ public class CuentaValoresTest {
 		assertTrue(sut.anhadeValor(v));
 		assertTrue(sut.getValores().size()==1);
 		assertEquals(sut.getValores().get(0), v);
+		assertEquals(sut.getSaldo(), 26.25);
 		
 		v = new Valor("BancoSantander", 100, 200);
 		assertTrue(sut.anhadeValor(v));
 		assertTrue(sut.getValores().size()==2);
 		assertEquals(sut.getValores().get(1), v);
+		assertEquals(sut.getSaldo(), 20026.25);
+
 		
 		// CASOS NO VALIDOS
 		assertFalse(sut.anhadeValor(new Valor("Telepizza", 10, 2.5)));

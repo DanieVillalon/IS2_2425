@@ -13,6 +13,8 @@ import java.util.List;
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class CuentaAhorro extends Cuenta {		//CCog: 7	CCogn: 0'5385	(n = 13)
+												//WMC: ∑CC = 20
+												//CBO: 2 (Tarjeta y Movimiento)
 
 	private List<Movimiento> Movimientos;
 	private LocalDate caducidadDebito;

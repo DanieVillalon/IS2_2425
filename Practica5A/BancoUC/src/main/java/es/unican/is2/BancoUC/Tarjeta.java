@@ -7,7 +7,9 @@ package es.unican.is2.BancoUC;
  *  - WMCn = WMC/n (Con n el número de métodos de la clase)
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
-public abstract class Tarjeta {	//CCog: 0	CCogn: 0	(n = 1)
+public abstract class Tarjeta {		//CCog: 0	CCogn: 0	(n = 1)
+									//WMC: ∑CC = 1
+									//CBO: 2 (Cliente y CuentaAhorro)
 	
 	protected String numero, titular, cvc;		
 	protected CuentaAhorro cuentaAsociada;

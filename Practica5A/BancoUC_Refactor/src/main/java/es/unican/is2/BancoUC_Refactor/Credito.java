@@ -5,16 +5,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Cálculo de métricas de complejidad:
+ *  - WMC = 1*5 + 2 + 3*3 = 16 (suma de las Complejidades ciclomáticas de todos los métodos de la clase)
+ *  - WMCn = WMC/n (Con n el número de métodos de la clase)
+ *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
+ */
+public class Credito extends Tarjeta {		//CCog: 5	CCogn: 0,5 (n = 10)
+											//WMC: ∑CC = 15
+											//CBO: 1 (Movimiento)
 
-public class Credito extends Tarjeta {
 	
 	private static final double COMISION = 0.05;
 	private double credito;
-	private List<Movimiento> MovimientosMensuales;
+	private List<Movimiento> movimientosMensuales;
 	private List<Movimiento> historicoMovimientos;
 
 	public Credito(String numero, String titular, String cvc,
-			CuentaAhorro cuentaAsociada, double credito) {
+			CuentaAhorro cuentaAsociada, double credito) {	//CC: 1		CCog:0 
 		super(numero, titular, cvc, cuentaAsociada);
 		this.credito = credito;
 	}
@@ -26,7 +34,7 @@ public class Credito extends Tarjeta {
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double importe) throws saldoInsuficienteException, datoErroneoException {
+	public void retirar(double importe) throws saldoInsuficienteException, datoErroneoException {	//CC: 1		CCog:0 
 		String msgERR = "Credito insuficiente";
 		importe += importe * COMISION; // Comision por operacion con tarjetas credito (Refactorizado como constante)
 		String c = "Retirada en cajero";
@@ -35,7 +43,7 @@ public class Credito extends Tarjeta {
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double importe) throws saldoInsuficienteException, datoErroneoException {
+	public void pagoEnEstablecimiento(String datos, double importe) throws saldoInsuficienteException, datoErroneoException {	//CC: 1		CCog:0 
 		String msgERR = "Saldo insuficiente";
 		String c = "Compra a credito en: " + datos;
 		nuevoMovimiento(c, importe, msgERR);
@@ -46,7 +54,7 @@ public class Credito extends Tarjeta {
 	 * @param concepto Concepto asociado al movimiento
 	 * @param importe Importe retirado de la cuenta
 	 */
-	private void nuevoMovimiento(String concepto, double importe, String msgERR) {
+	private void nuevoMovimiento(String concepto, double importe, String msgERR) {	//CC: 3		CCog: 2
 		if (importe<0)
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		
@@ -58,35 +66,35 @@ public class Credito extends Tarjeta {
 		m.setF(now);
 		m.setC(concepto);
 		m.setI(-importe);
-		MovimientosMensuales.add(m);
+		movimientosMensuales.add(m);
 
 	}
 	
-    private double getGastosAcumulados() {
+    private double getGastosAcumulados() {	//CC: 2		CCog: 1
 		double r = 0.0;
-		for (int i = 0; i < this.MovimientosMensuales.size(); i++) {
-			Movimiento m = (Movimiento) MovimientosMensuales.get(i);
+		for (int i = 0; i < this.movimientosMensuales.size(); i++) {
+			Movimiento m = (Movimiento) movimientosMensuales.get(i);
 			r += m.getI();
 		}
 		return r;
 	}
 	
 	
-	public LocalDate getCaducidadCredito() {
+	public LocalDate getCaducidadCredito() {	//CC: 1		CCog: 0
 		return this.cuentaAsociada.getCaducidadCredito();
 	}
 
 	/**
 	 * Metodo que se invoca automaticamente el dia 1 de cada mes
 	 */
-	public void liquidar() {
+	public void liquidar() {	//CC: 3		CCog: 2
 		Movimiento liq = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
 		liq.setF(now);
 		liq.setC("Liquidacion de operaciones tarjeta credito");
 		double r = 0.0;
-		for (int i = 0; i < this.MovimientosMensuales.size(); i++) {
-			Movimiento m = (Movimiento) MovimientosMensuales.get(i);
+		for (int i = 0; i < this.movimientosMensuales.size(); i++) {
+			Movimiento m = (Movimiento) movimientosMensuales.get(i);
 			r += m.getI();
 		}
 		liq.setI(-r);
@@ -94,19 +102,19 @@ public class Credito extends Tarjeta {
 		if (r != 0)
 			cuentaAsociada.addMovimiento(liq);
 		
-		historicoMovimientos.addAll(MovimientosMensuales);
-		MovimientosMensuales.clear();
+		historicoMovimientos.addAll(movimientosMensuales);
+		movimientosMensuales.clear();
 	}
 
-	public List<Movimiento> getMovimientosMensuales() {
-		return MovimientosMensuales;
+	public List<Movimiento> getMovimientosMensuales() {		//CC: 1		CCog: 0
+		return movimientosMensuales;
 	}
 	
-	public CuentaAhorro getCuentaAsociada() {
+	public CuentaAhorro getCuentaAsociada() {	//CC: 1		CCog: 0
 		return cuentaAsociada;
 	}
 	
-	public List<Movimiento> getMovimientos() {
+	public List<Movimiento> getMovimientos() {		//CC: 1		CCog: 0
 		return historicoMovimientos;
 	}
 

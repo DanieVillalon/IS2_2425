@@ -13,6 +13,8 @@ package es.unican.is2.BancoUC;
  * de una de las entidades del IBEX 35
  */
 public class Valor {	//CCog: 0	CCogn: 0	(n = 7)
+						//WMC: ∑CC = 7
+						//CBO: 1 (CuentaValores)
 	
 	private String entidad;	
 	private int numAcciones;

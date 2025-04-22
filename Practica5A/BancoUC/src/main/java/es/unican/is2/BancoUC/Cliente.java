@@ -12,6 +12,8 @@ import java.util.List;
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class Cliente {		//CCog: 9	CCogn: 0'8182 (n = 11)
+							//WMC: ∑CC = 16
+							//CBO: 2 (Tarjeta y Cuenta)
 	
 	public String nombre;
 	public String calle;

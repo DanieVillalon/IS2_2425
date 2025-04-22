@@ -13,6 +13,8 @@ import java.util.List;
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class Credito extends Tarjeta {		//CCog: 8	CCogn: 0'888	(n = 9)
+											//WMC: ∑CC = 16
+											//CBO: 1 (Movimiento)
 	
 	private double credito;
 	private List<Movimiento> MovimientosMensuales;
