@@ -2,8 +2,9 @@ package es.unican.is2.BancoUC_Refactor;
 
 /**
  * Cálculo de métricas de complejidad:
- *  - WMC = Suma de las Complejidades ciclomáticas de todos los métodos de la clase. Los métodos abstractos no computan para el cálculo de la métrica
- *  - WMCn = WMC/n (Con n el número de métodos de la clase)
+ *  - WMC = Suma de las Complejidades ciclomáticas de todos los métodos de la clase. 
+ *  		Los métodos abstractos no computan para el cálculo de la métrica.
+ *  - WMCn = WMC/n con n el número de métodos de la clase.
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public abstract class Tarjeta {		//CCog: 0	CCogn: 0	(n = 1)

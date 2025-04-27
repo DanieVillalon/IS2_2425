@@ -2,8 +2,8 @@ package es.unican.is2.BancoUC;
 
 /**
  * Cálculo de métricas de complejidad:
- *  - WMC = 1*7 = 7 (suma de las Complejidades ciclomáticas de todos los métodos de la clase)
- *  - WMCn = WMC/n (Con n el número de métodos de la clase)
+ *  - WMC = Suma de las Complejidades ciclomáticas de todos los métodos de la clase. 
+ *  - WMCn = WMC/n con n el número de métodos de la clase.
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 

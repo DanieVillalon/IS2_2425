@@ -8,8 +8,8 @@ import java.util.List;
 
 /**
  * Cálculo de métricas de complejidad:
- *  - WMC = 1*5 + 2 + 3*3 = 16 (suma de las Complejidades ciclomáticas de todos los métodos de la clase)
- *  - WMCn = WMC/n (Con n el número de métodos de la clase)
+ *  - WMC = Suma de las Complejidades ciclomáticas de todos los métodos de la clase.
+ *  - WMCn = WMC/n con n el número de métodos de la clase.
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class Credito extends Tarjeta {		//CCog: 8	CCogn: 0'888	(n = 9)
