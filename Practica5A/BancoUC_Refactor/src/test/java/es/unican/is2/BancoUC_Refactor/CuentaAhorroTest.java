@@ -13,12 +13,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import es.unican.is2.BancoUC_Refactor.CuentaAhorro;
-import es.unican.is2.BancoUC_Refactor.Movimiento;
-import es.unican.is2.BancoUC_Refactor.datoErroneoException;
-import es.unican.is2.BancoUC_Refactor.saldoInsuficienteException;
-
-
 
 public class CuentaAhorroTest {
 	private CuentaAhorro sut;

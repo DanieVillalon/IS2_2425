@@ -14,7 +14,7 @@ import java.util.List;
  *  - CCogn = CCog/n (contribuciones al CCog anotadas en cada método)
  */
 public class CuentaAhorro extends Cuenta {		//CCog: 4	CCogn: 0,28	(n = 14)
-												//WMC: ∑CC = 18
+												//WMC: ∑CC = 17
 												//CBO: 2 (Tarjeta y Movimiento)
 
 	private List<Movimiento> movimientos;
@@ -62,10 +62,9 @@ public class CuentaAhorro extends Cuenta {		//CCog: 4	CCogn: 0,28	(n = 14)
 	}
 
 	@Override
-	public double getSaldo() {	//CC: 2		CCog: 1
+	public double getSaldo() {	//CC: 1		CCog: 1
 		double r = 0.0;
-		for (int i = 0; i < this.movimientos.size(); i++) {
-			Movimiento m = (Movimiento) movimientos.get(i);
+		for (Movimiento m : movimientos) {
 			r += m.getI();
 		}
 		return r;
