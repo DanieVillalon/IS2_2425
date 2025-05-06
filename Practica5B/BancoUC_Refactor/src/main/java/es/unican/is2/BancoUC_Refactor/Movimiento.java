@@ -3,6 +3,8 @@ package es.unican.is2.BancoUC_Refactor;
 
 import java.time.LocalDateTime;
 
+import es.unican.is2.BancoUC_Refactor.Movimiento;
+
 /**
  * Cálculo de métricas de complejidad:
  *  - WMC = Suma de las Complejidades ciclomáticas de todos los métodos de la clase. 
@@ -44,7 +46,11 @@ public class Movimiento { 		//CCog: 0  CCogn: 0	(n = 7)
 
 	
 	@Override
-	public boolean equals(Object obj) {		//CC: 1		CCog: 0
+	public boolean equals(Object obj) throws NullPointerException {		//CC: 1		CCog: 0
+		if (obj == null) {
+			System.err.println("The object to compare shouldn't be null");
+			throw new NullPointerException();
+		}
 		Movimiento other = (Movimiento)obj;
 		return (concepto.equals(other.concepto) && fecha.equals(other.fecha)&& importe==other.importe);
 	}
