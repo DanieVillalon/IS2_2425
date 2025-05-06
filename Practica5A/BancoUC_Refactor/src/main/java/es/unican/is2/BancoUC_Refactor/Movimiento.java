@@ -2,6 +2,7 @@ package es.unican.is2.BancoUC_Refactor;
 
 
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
 import es.unican.is2.BancoUC_Refactor.Movimiento;
 
@@ -15,7 +16,7 @@ import es.unican.is2.BancoUC_Refactor.Movimiento;
 public class Movimiento { 		//CCog: 0  CCogn: 0	(n = 7)
 								//WMC: ∑CC = 7
 								//CBO: 2 (Credito y CuentaAhorro)
-	
+	private Logger logger = Logger.getLogger(getClass().getName());
 	private String concepto;
 	private LocalDateTime fecha;
 	private double importe;
@@ -47,7 +48,7 @@ public class Movimiento { 		//CCog: 0  CCogn: 0	(n = 7)
 	@Override
 	public boolean equals(Object obj) throws NullPointerException {		//CC: 1		CCog: 0
 		if (obj == null) {
-			System.out.println("The object to compare shouldn't be null");
+			logger.info("equals recived an object that turned out to be null.");
 			throw new NullPointerException();
 		}
 		Movimiento other = (Movimiento)obj;

@@ -1,5 +1,7 @@
 package es.unican.is2.BancoUC_Refactor;
 
+import java.util.logging.Logger;
+
 import es.unican.is2.BancoUC_Refactor.Valor;
 
 /**
@@ -16,7 +18,7 @@ import es.unican.is2.BancoUC_Refactor.Valor;
 public class Valor {	//CCog: 0	CCogn: 0	(n = 7)
 						//WMC: ∑CC = 7
 						//CBO: 1 (CuentaValores)
-	
+	private Logger logger = Logger.getLogger(getClass().getName());
 	private String entidad;	
 	private int numAcciones;
 	private double cotizacion;
@@ -50,7 +52,7 @@ public class Valor {	//CCog: 0	CCogn: 0	(n = 7)
 	@Override
 	public boolean equals(Object obj) {	//CC: 1		CCog: 0
 		if (obj == null) {
-			System.out.println("The object to compare shouldn't be null");
+			logger.info("equals recived an object that turned out to be null.");
 			throw new NullPointerException();
 		}
 		Valor other = (Valor)obj;

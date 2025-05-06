@@ -62,13 +62,13 @@ public class CuentaAhorroTest {
 		assertTrue(sut.getSaldo()==0);	
 
 		sut.addMovimiento(m1);
-		assertTrue(sut.getSaldo() == 100);
-		assertTrue(sut.getMovimientos().size()==1);
+		assertEquals(100, sut.getSaldo());
+		assertEquals(1, sut.getMovimientos().size());
 		
 		sut.addMovimiento(m2);
 		sut.addMovimiento(m3);
-		assertTrue(sut.getSaldo()==1800);
-		assertTrue(sut.getMovimientos().size()==3);
+		assertEquals(1800, sut.getSaldo());
+		assertEquals(3, sut.getMovimientos().size());
 	}
 	
 	@Test
@@ -86,8 +86,8 @@ public class CuentaAhorroTest {
 		
 		try {
 			sut.retirar(50);
-			assertTrue(sut.getSaldo()==50);
-			assertTrue(sut.getMovimientos().size()==2);
+			assertEquals(50, sut.getSaldo());
+			assertEquals(2, sut.getMovimientos().size());
 			assertEquals("Retirada de efectivo", sut.getMovimientos().get(1).getC());
 		} catch (datoErroneoException e) {
 			fail("No debe lanzar DatoErroneoException");
@@ -116,13 +116,13 @@ public class CuentaAhorroTest {
 
 		try {
 			sut.ingresar(0.01);
-			assertTrue(sut.getSaldo()==0.01);
-			assertTrue(sut.getMovimientos().size()==1);
-			assertEquals(sut.getMovimientos().get(0).getC(),"Ingreso en efectivo");
+			assertEquals(0.01, sut.getSaldo());
+			assertEquals(1, sut.getMovimientos().size());
+			assertEquals("Ingreso en efectivo",sut.getMovimientos().get(0).getC());
 			
 			sut.ingresar(100);
-			assertTrue(sut.getSaldo()==100.01);
-			assertTrue(sut.getMovimientos().size()==2);
+			assertEquals(100.01, sut.getSaldo());
+			assertEquals(2, sut.getMovimientos().size());
 			
 		} catch (datoErroneoException e) {
 			fail("No debe lanzar la excepci�n");
@@ -144,8 +144,8 @@ public class CuentaAhorroTest {
 		// Test ingresar el limite
 		try {
 			sut.ingresar("Ingreso1", 0.01);
-			assertTrue(sut.getSaldo()==0.01);
-			assertTrue(sut.getMovimientos().size()==1);
+			assertEquals(0.01, sut.getSaldo());
+			assertEquals(1, sut.getMovimientos().size());
 			assertEquals("Ingreso1", sut.getMovimientos().get(0).getC());
 			
 			sut.ingresar("Ingreso2", 100);
