@@ -48,6 +48,10 @@ public class Valor {	//CCog: 0	CCogn: 0	(n = 7)
 	
 	@Override
 	public boolean equals(Object obj) {	//CC: 1		CCog: 0
+		if (obj == null) {
+			System.err.println("The object to compare shouldn't be null");
+			throw new NullPointerException();
+		}
 		Valor other = (Valor)obj;
 		return (entidad.equals(other.entidad) && numAcciones==other.numAcciones);
 
