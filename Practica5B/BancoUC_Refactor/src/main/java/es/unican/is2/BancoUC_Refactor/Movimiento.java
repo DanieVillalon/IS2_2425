@@ -47,7 +47,7 @@ public class Movimiento { 		//CCog: 0  CCogn: 0	(n = 7)
 
 	@Override
 	public boolean equals(Object obj) throws NullPointerException {		//CC: 1		CCog: 0
-		if (obj == null) {
+		if (obj == null) { //Resuelta incidencia SonarQuebe
 			logger.info("equals recived an object that turned out to be null.");
 			throw new NullPointerException();
 		}
